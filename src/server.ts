@@ -6,6 +6,10 @@ import express from "express"
 /* Create server */
 const server = express();
 
+/* Setup api config */
+import apiConfig from './apis'
+server.use('/apis', apiConfig)
+
 server.use("/test", (req, res) => {
     return res.send("Ok !!!")
 })
