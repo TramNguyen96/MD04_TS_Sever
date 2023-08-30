@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirm</title>
+    <style>
+        .logo_img {
+            width: 600px;
+            height: 300px;
+            /* border-radius: 50%; */
+            /* margin-left: 40%; */
+        }
+
+        .content {
+            /* margin-left: 30%; */
+        }
+
+        /* .btn {
+            background-color: rgb(49, 202, 248);
+            color: white;
+            font-weight: 900;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+            margin-left: 40%;
+            cursor: pointer;
+            text-decoration: none;
+        } */
+    </style>
+</head>
+
+<body>
+    <img class="logo_img" src="https://wallpapercave.com/wp/wp3132121.jpg">
+    <h1 class="content">YSL BEAUTY - Hi, <%= user.first_name %>
+            <%= user.last_name %> !</h1>
+    <p class="content">
+        Dear <%= user.first_name %>
+            <%= user.last_name %>, <br />
+                <br />
+                We hope this email finds you well. As part of our commitment to ensuring the security of your account,
+                we are conducting
+                a routine password verification process.<br />
+                <br />
+                In order to continue using your account without any interruptions, we kindly request that you verify
+                your current
+                password. Please follow the steps below to complete the verification:<br />
+                <br />
+                <br />
+                1. Click on the following link: <a href="http://localhost:4000/apis/v1/users/confirm/<%= token %>"
+                    class="content btn">CONFIRM</a><br />
+                2. Log in using your existing credentials.<br />
+                3. Enter your current password for verification purposes.<br />
+                <br />
+                <br />
+                Please be assured that this process is in place to safeguard your account and personal information. If
+                you have any
+                concerns or questions regarding this verification, please feel free to contact our support team at
+                <a href="#" class="content btn">yslbeautyus@gmail.com</a> or
+                09012345678.<br />
+                <br />
+                We appreciate your prompt attention to this matter. Your security is our priority, and we thank you for
+                your
+                cooperation.<br />
+                <br />
+                Best regards,
+                YSL Beauty Team
+    </p>
+</body>
+
+</html>

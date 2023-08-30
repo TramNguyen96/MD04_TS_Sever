@@ -1,0 +1,36 @@
+datasource db {
+    provider = "mongodb"
+    url      = "mongodb+srv://tramnp:12345@cluster0.jjrdiqy.mongodb.net/cluster0"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model users {
+    id       String    @id @default(auto()) @map("_id") @db.ObjectId
+    userName String
+    email    String    @unique
+    password String
+    avatar   String
+    isActive Boolean   @default(true)
+    createAt DateTime  @default(now())
+    updateAt DateTime  @default(now())
+    address  Address[]
+}
+
+model tests {
+    id    String @id @default(auto()) @map("_id") @db.ObjectId
+    title String
+}
+
+type Address {
+    provinceId   Int
+    provinceName String
+    districtId   Int
+    districtName String
+    wardCode     String
+    wardName     String
+    title        String
+    id           String
+}
