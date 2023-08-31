@@ -1,13 +1,11 @@
-// /* Create Express Router */
-// import express from 'express'
-// const router = express.Router()
+/* Create Express Router */
+import express from 'express'
+const router = express.Router()
 
-// import UserController from '../../controllers/user.controller'
+import UserController from '../../controllers/user.controller'
 
-// router.post("/", UserController.create)
-// router.post("/login", UserController.login)
-// router.get("/", UserController.findAll)
-
+router.post("/login", UserController.login)
+router.post("/", UserController.register)
 
 
-// export default router;
+export default router;

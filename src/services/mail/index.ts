@@ -1,6 +1,19 @@
 import nodemailer from 'nodemailer';
+
+interface MailOption{
+    to: string, // Người nhận
+    subject: string, // Chủ Đề
+    html?: string, // Template HTML
+    text?: string // Văn Bản
+}
+
+import emailConfirm from './templates/emailConfirm'
+export const templates = {
+    emailConfirm: emailConfirm
+}
+
 export default {
-    sendMail: async (mailOptions: any) => {
+    sendMail: async (mailOption: MailOption) => {
         try {
 
             const transporter = nodemailer.createTransport({
@@ -12,8 +25,8 @@ export default {
             });
             
             await transporter.sendMail({
-                from: 'tramzan18@gmail.com',
-                ...mailOptions
+                from: process.env.MS_USER,
+                ...mailOption
             });
 
             return true

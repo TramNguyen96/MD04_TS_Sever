@@ -14,66 +14,30 @@ server.use(cors())
 import bodyParser from 'body-parser';
 server.use(bodyParser.json())
 
-/* Prisma Client */
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
-import { Request, Response } from 'express';
+/* Test send mail */
+import MailServer, {templates} from './services/mail'
 
-server.use("/test", async (req: Request, res: Response)=>{
-    let newUser = await  prisma.users.create({
-            data: {
-                userName: "admin",
-                password: "123",
-                avatar:  "abc.png",
-                email: "1@2",
-                isActive: true,
-                address: [
-                    {
-                        provinceId: 1,
-                        provinceName: "Tỉnh 1",
-                        districtId: 2,
-                        districtName: "Quân 2",
-                        wardCode: "123",
-                        wardName: "Xã 123",
-                        title: "Nhà Riêng",
-                        id: String(Date.now() * Math.random())
-                    },
-                    {
-                        provinceId: 1,
-                        provinceName: "Tỉnh 1",
-                        districtId: 2,
-                        districtName: "Quân 2",
-                        wardCode: "123",
-                        wardName: "Xã 123",
-                        title: "Công Ty",
-                        id: String(Date.now() * Math.random())
-                    }
-                ]
-            }
+server.use("/test", async (req, res) => {
+     let resuslt = await MailServer.sendMail({
+        to: "tramnp960718@gmail.com",
+        subject: "Test Template",
+        html: templates.emailConfirm({
+            productName: 'Catherine Deane',
+            productWebUrl: 'https://pokemoninmylife.com/',
+            receiverName: 'New User',
+            confirmLink: 'abc.xyz',
+            language: String(req.headers.language)
+        })
     })
 
-    let allUsers = await prisma.users.findMany();
-
-    console.log("newUser", newUser);
-    // console.log("allUsers", allUsers);
-    
-})
-
-
-import axios from 'axios';
-server.use("/authen-google", async (req, res) => {
-    let result = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.FB_API_KEY}`, {
-        idToken: req.body.token
-    })
-
-    console.log("result", result);
-    res.json(result.data)
-    
+    console.log("resuslt", resuslt)
 })
 
 /* Setup api config */
-// import apiConfig from './apis'
-// server.use('/apis', apiConfig)
+import apiConfig from './apis'
+import guard from './middlewares/guard';
+
+server.use('/apis', guard.ipAuthen, apiConfig)
 
 /* Get server in port */
 server.listen(process.env.SERVER_PORT, () => {

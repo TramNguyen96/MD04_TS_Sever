@@ -8,3 +8,19 @@
 
 -   Type ORMS
 -   npm i typeorm mysql reflect-metadata --save
+
+## .env
+
+-   git rm --cached .env: chặn .env push lên git
+
+## Service mail
+
+-   npm i --save-dev nodemailer
+
+## JWT
+
+-   npm i jsonwebtoken
+
+## EJS - Template
+
+-   npm i --save-dev @types/ejs

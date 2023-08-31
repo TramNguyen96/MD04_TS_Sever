@@ -1,6 +1,6 @@
 datasource db {
     provider = "mongodb"
-    url      = "mongodb+srv://tramnp:12345@cluster0.jjrdiqy.mongodb.net/cluster0"
+    url      = env("MDB_URL")
 }
 
 generator client {
@@ -8,20 +8,18 @@ generator client {
 }
 
 model users {
-    id       String    @id @default(auto()) @map("_id") @db.ObjectId
-    userName String
-    email    String    @unique
-    password String
-    avatar   String
-    isActive Boolean   @default(true)
-    createAt DateTime  @default(now())
-    updateAt DateTime  @default(now())
-    address  Address[]
-}
-
-model tests {
-    id    String @id @default(auto()) @map("_id") @db.ObjectId
-    title String
+    id           String    @id @default(auto()) @map("_id") @db.ObjectId
+    userName     String    @unique
+    email        String    @unique
+    emailConfirm Boolean   @default(false)
+    password     String
+    firstName    String
+    lastName     String
+    avatar       String    @default("https://www.slotcharter.net/wp-content/uploads/2020/02/no-avatar.png")
+    isActive     Boolean   @default(true)
+    createAt     DateTime  @default(now())
+    updateAt     DateTime  @default(now())
+    address      Address[]
 }
 
 type Address {
