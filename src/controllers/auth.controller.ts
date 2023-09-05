@@ -33,5 +33,18 @@ export default {
                 
 
     },
-
+  authentication: async function(req: Request, res: Response) { 
+        try {
+            let tokenObj = jwt.verifyToken(String(req.headers.token));
+            if(tokenObj) {
+                let modelRes = await userModel.infoById((tokenObj as any).id);
+                return res.status(modelRes.status ? 200 : 213).json(modelRes);
+            }
+            
+        }catch(err) {
+            return res.status(500).json({
+                messsage: Text(String(req.headers.language)).controllerErr
+            })
+        }
+    }
 }
