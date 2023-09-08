@@ -14,25 +14,6 @@ server.use(cors())
 import bodyParser from 'body-parser';
 server.use(bodyParser.json())
 
-/* Test send mail */
-import MailServer, {templates} from './services/mail'
-
-server.use("/test", async (req, res) => {
-     let resuslt = await MailServer.sendMail({
-        to: "tramnp960718@gmail.com",
-        subject: "Test Template",
-        html: templates.emailConfirm({
-            productName: 'Catherine Deane',
-            productWebUrl: 'https://pokemoninmylife.com/',
-            receiverName: 'New User',
-            confirmLink: 'abc.xyz',
-            language: String(req.headers.language)
-        })
-    })
-
-    console.log("resuslt", resuslt)
-})
-
 /* Setup api config */
 import apiConfig from './apis'
 import guard from './middlewares/guard';

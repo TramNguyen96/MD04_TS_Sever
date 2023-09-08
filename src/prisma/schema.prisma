@@ -20,6 +20,7 @@ model users {
     createAt     DateTime  @default(now())
     updateAt     DateTime  @default(now())
     address      Address[]
+    isAdmin      Boolean   @default(false)
 }
 
 type Address {
@@ -31,4 +32,34 @@ type Address {
     wardName     String
     title        String
     id           String
+}
+
+model categories {
+    id       String     @id @default(auto()) @map("_id") @db.ObjectId
+    title    String
+    active   Boolean    @default(false)
+    avatar   String     @default("https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.onantiquerow.com%2Fimages%2Fcategory%2F&psig=AOvVaw36SMVVjWi7_4y_aRZTaCy9&ust=1693986193901000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNCAo738koEDFQAAAAAdAAAAABAE")
+    img      String
+    banner   String
+    des      String
+    link     String
+    products products[]
+}
+
+model products {
+    id              String            @id @default(auto()) @map("_id") @db.ObjectId
+    name            String
+    avatar          String            @default("https://www.slotcharter.net/wp-content/uploads/2020/02/no-avatar.png")
+    price           Float
+    des             String
+    categoryId      String            @db.ObjectId
+    category        categories        @relation(fields: [categoryId], references: [id])
+    productPictures productPictures[]
+}
+
+model productPictures {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    path      String
+    productId String   @db.ObjectId
+    product   products @relation(fields: [productId], references: [id])
 }

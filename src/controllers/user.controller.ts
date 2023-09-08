@@ -11,7 +11,7 @@ export default {
     try{
         /* Hash password */
         req.body.password = await bcrypt.hash(req.body.password, 10);
-
+    
         let newUser: NewUser = {
             ...req.body,
             createAt: new Date(Date.now()*Math.random()),

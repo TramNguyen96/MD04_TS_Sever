@@ -8,4 +8,10 @@ router.use('/users', userModule)
 import authenModule from './modules/authen.api'
 router.use('/auth', authenModule)
 
+import categoryModule from './modules/category'
+router.use('/categories', categoryModule)
+
+import productModule from './modules/product'
+router.use('/products', productModule)
+
 export default router;

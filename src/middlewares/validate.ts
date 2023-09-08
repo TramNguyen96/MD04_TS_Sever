@@ -1,15 +1,18 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-export default {
-    isEmail: function(email: string): boolean{
+
+function isEmail (email: string): boolean{
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
-    },
+    }
 
+export default {
     validateRegister: function (req: Request, res: Response, next: NextFunction){
+        
         const { userName, email, password, confirmPassword, firstName, lastName } = req.body;
+        console.log("req.body", req.body);
 
-        if(!userName || !email || !password || !confirmPassword || !firstName || !lastName){
+        if(req.body.userName == null || req.body.email  == null|| req.body.password == null || req.body.firstName == null || req.body.lastName == null){
             return res.status(213).json(
                 {
                     status: false,
@@ -17,17 +20,8 @@ export default {
                 }
             )
         }
-
-        if(password !== confirmPassword){
-            return res.status(213).json(
-                {
-                    status: false,
-                    message: "Incorrect password !"
-                }
-            )
-        }
-
-        if(!this.isEmail(email)){
+        
+        if(!isEmail(email)){
             return res.status(213).json(
                 {
                     status: false,
@@ -36,6 +30,15 @@ export default {
             )
         }
 
+        //  if (password !== confirmPassword) {
+        //     return res.status(213).json(
+        //         {
+        //             status: false,
+        //             message: "Incorrect password !"
+        //         }
+        //     )
+        // }
+        
         next();
     }
 }
