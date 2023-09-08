@@ -43,5 +43,27 @@ export default {
                 message: "Lỗi controller"
             })
         }
-    }
+    },
+
+    findMany: async function(req: Request, res: Response) {
+        try {
+           let modelRes = await productModel.findMany();
+           return res.status(modelRes.status ? 200 : 213).json(modelRes);
+        }catch(err){
+            return res.status(500).json({
+                message: "Lỗi controller"
+            })
+        }
+    },
+
+    findById: async function(req: Request, res: Response) {
+        try {
+           let modelRes = await productModel.findById(String(req.params.productId));
+           return res.status(modelRes.status ? 200 : 213).json(modelRes);
+        }catch(err){
+            return res.status(500).json({
+                message: "Lỗi controller"
+            })
+        }
+    },
 }

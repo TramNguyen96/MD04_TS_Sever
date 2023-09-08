@@ -50,5 +50,30 @@ export default {
             }
 
         }
+    },
+
+    findCategoryIdRelation: async function (categoryId: string) {
+        try {
+            let data = await prisma.categories.findMany({
+                where: {
+                    id: categoryId
+                },
+                include: {
+                    products: true
+                }
+            })
+            return {
+                status: true,
+                message: 'Get categories of id success',
+                data
+            }
+        } catch (err) {
+            console.log("err", err);
+            
+            return {
+                status: false,
+                message: 'Loi model'
+            }
+        }
     }
 }

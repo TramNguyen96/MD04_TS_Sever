@@ -25,5 +25,19 @@ export default {
                 message:"Controller Error"
             })
         }
-    }
+    },
+
+    findCategoryIdRelation: async function (req: Request, res:Response) { 
+        try {
+            let result = await categoryModel.findCategoryIdRelation(req.params.id);
+
+            return res.status(result.status ? 200 : 213).json(result)
+
+        } catch (err) {
+            return res.status(500).json({
+                message: "Controller Error"
+            })
+        }
+    },
+
 }
