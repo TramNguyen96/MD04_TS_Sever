@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --config nodemon.config.json --exec ts-node src/server.ts",
     "db": "prisma db push",
     "client": "prisma generate"
   },

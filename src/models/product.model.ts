@@ -66,7 +66,7 @@ export default {
                     id: productId
                 },
                 include: {
-                    productPictures: true
+                    productPictures: true,
                 }
             });
 
@@ -84,6 +84,57 @@ export default {
         }
     },
 
+    search: async function(searchKey: string) {
+        try {
+            let products = await prisma.products.findMany(
+                {
+                    where: {
+                        name: {
+                            contains: searchKey,
+                            // mode: 'insensitive'
+                        }
+                    }
+                }
+            );
 
+            return {
+                status: true,
+                message: "Search success!",
+                data: products
+            }
+        }catch(err) {
+            console.log("lỗi", err)
+            return {
+                status: false,
+                message: "Lỗi model",
+                data: null
+            }
+        }
+    },
+
+    /* phan trang */
+    pagination: async function (maxItemPage: number, skipItem: any) {
+        try {
+            let products = await prisma.products.findMany({
+                take: maxItemPage,
+                skip: skipItem,
+            });
+            let countItem = (await prisma.products.findMany()).length;
+            let maxPage = Math.ceil(countItem / maxItemPage);
+            return {
+                status: true,
+                message: "san pham duoc tim thay!",
+                maxPage,
+                data: products,
+            }
+        } catch (err) {
+            console.log("err", err)
+            return {
+                status: false,
+                message: "lỗi model!"
+            }
+        }
+    },
 
 }
+

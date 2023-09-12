@@ -87,4 +87,17 @@ export default {
                 
 
     },
+
+    findMany: async (req: Request, res: Response) => {
+        try{
+            let modelRes = await userModel.findMany();
+
+            return res.status(modelRes.status ? 200 : 213).json(modelRes)
+            
+        }catch(err){
+            return res.status(500).json({
+                message: Text(String(req.headers.language)).controllerErr
+            })
+        }
+    },
 }

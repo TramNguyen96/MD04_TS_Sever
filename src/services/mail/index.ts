@@ -8,8 +8,10 @@ interface MailOption{
 }
 
 import emailConfirm from './templates/emailConfirm'
+import emailOtp from './templates/emailOtp'
 export const templates = {
-    emailConfirm: emailConfirm
+    emailConfirm,
+    emailOtp
 }
 
 export default {
@@ -35,9 +37,3 @@ export default {
         }
     }
 }
-
-// {
-//     to: "mieuteacher@gmail.com",
-//     subject: "Thử nghiệm send mail with node js aaaa",
-//     html: template
-// }

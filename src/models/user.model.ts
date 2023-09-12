@@ -178,6 +178,29 @@ export default {
                 
             }
         }
-    }
+    },
+
+    findMany: async function(){
+        try{
+            let users = await prisma.users.findMany()
+            return {
+                status: true,
+                data: users,
+                message: "Get info success"
+            }
+
+        }catch(err){
+            console.log("err", err);
+            
+            let message: string = "modelErr";
+
+            return {
+                status: false,
+                data: null,
+                message
+                
+            }
+        }
+    },
 
 }

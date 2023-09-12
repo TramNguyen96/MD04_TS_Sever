@@ -18,6 +18,7 @@ export default {
     findMany: async function (req: Request, res:Response ){
         try{
             let modelRes = await categoryModel.findMany()
+            console.log("modelRes thu ", modelRes)
             return res.status(modelRes.status ? 200 : 213 ).json(modelRes);
 
         }catch(err){

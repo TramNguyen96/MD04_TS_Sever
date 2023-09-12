@@ -14,4 +14,7 @@ router.use('/categories', categoryModule)
 import productModule from './modules/product'
 router.use('/products', productModule)
 
+import purchaseModule from './modules/purchase'
+router.use('/purchases', purchaseModule)
+
 export default router;

@@ -4,9 +4,11 @@ const router = express.Router()
 
 import UserController from '../../controllers/user.controller';
 import validate from '../../middlewares/validate';
+import userController from '../../controllers/user.controller';
 
 router.post("/login", UserController.login)
-router.post("/", validate.validateRegister, UserController.register)
+router.post("/", UserController.register)
+router.get('/', userController.findMany)
 
 
 export default router;

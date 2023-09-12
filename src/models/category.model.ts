@@ -43,6 +43,7 @@ export default {
             }
 
         }catch(err){
+            console.log("loi model err 555", err)
             return {
                 status: false,
                 message: "Loi model",

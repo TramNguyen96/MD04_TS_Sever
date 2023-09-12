@@ -20,6 +20,17 @@ import guard from './middlewares/guard';
 
 server.use('/apis', guard.ipAuthen, apiConfig)
 
+// /* Test */
+// import { Request, Response } from 'express';
+// import fs from 'fs'
+// import path from 'path'
+// function Test(){
+//     let data = JSON.parse(fs.readFileSync(path.join(__dirname, "data.json"), "utf-8"));
+//     console.log("data", data);
+    
+// }
+// Test()
+
 /* Get server in port */
 server.listen(process.env.SERVER_PORT, () => {
     console.log(`Server on link: http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/`);
